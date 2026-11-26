@@ -26,8 +26,16 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      # Pages has no rewrites: serve the app for /blog and /blog/<essay> links too
-      - run: cp dist/index.html dist/404.html
+      # Pages has no rewrites: give /blog and each essay a real page, and serve the app for any other link
+      - run: |
+          mkdir -p dist/blog
+          cp dist/index.html dist/blog/index.html
+          for f in src/essays/*.md; do
+            slug=$(basename "$f" .md)
+            mkdir -p "dist/blog/$slug"
+            cp dist/index.html "dist/blog/$slug/index.html"
+          done
+          cp dist/index.html dist/404.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

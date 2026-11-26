@@ -40,7 +40,7 @@ const experience = [
     role: "Senior Consultant",
     context: "Lagos · Multi-sector consulting",
     progression:
-      "Promoted 3 times, from Associate · Quality Delivery Award, 4 of 150+ practitioners (2023)",
+      "Quality Delivery Award, 4 of 150+ practitioners (2023)",
   },
   {
     organization: "KPMG",
@@ -48,6 +48,41 @@ const experience = [
     detailPeriod: "2021",
     role: "Consultant",
     context: "Lagos · Financial services",
+  },
+];
+
+/**
+ * Builds from Columbia's Generative AI for Business course.
+ * Fill in `href` when a build is ready to share; until then the card shows "Link coming soon".
+ */
+const courseBuilds = [
+  {
+    title: "BreakGPT bias audit",
+    tag: "AI risk · Study",
+    body: "Tested whether an AI hiring screen treats equal candidates the same. It penalized the oldest candidate and favored whichever profile it read second; names had no effect.",
+    href: "",
+    status: "Complete",
+  },
+  {
+    title: "Job hunt agent",
+    tag: "Agent · Job search",
+    body: "Checks target companies' careers pages each morning, keeps the roles that fit my resumes, scores fit, tracks deadlines and flags what's new.",
+    href: "",
+    status: "Complete",
+  },
+  {
+    title: "Cover-letter skill",
+    tag: "Claude Code skill",
+    body: "A reusable skill that drafts a cover letter in my voice for one role, using only facts from my CV, the saved posting and checked company news.",
+    href: "",
+    status: "Complete",
+  },
+  {
+    title: "Values Coach",
+    tag: "Group project",
+    body: "An AI coach for company personality tests and behavioral interviews: decodes a company's hiring traits, runs practice rounds and flags inconsistent answers.",
+    href: "",
+    status: "Coming soon",
   },
 ];
 
@@ -943,6 +978,38 @@ function SitePage({ view, slug }: { view: "home" | "blog" | "essay"; slug?: stri
             Advanced Excel, SQL, Power BI, GitHub · Financial and cost modeling ·
             Claude Code, Codex, Lovable, Vercel
           </p>
+        </div>
+      </section>
+
+      <section className="coursework section" id="gen-ai-for-business" aria-labelledby="coursework-heading">
+        <div className="section-label">
+          <span>04</span>
+          <p>Coursework</p>
+        </div>
+        <div className="coursework-content">
+          <div className="coursework-heading">
+            <h2 id="coursework-heading">Gen AI for Business</h2>
+            <span>Columbia Business School · Fall 2026</span>
+          </div>
+          <div className="coursework-grid">
+            {courseBuilds.map((build, index) => (
+              <article className="coursework-card" key={build.title}>
+                <div className="coursework-card__meta">
+                  <span>0{index + 1} / {build.tag}</span>
+                  <span>{build.status}</span>
+                </div>
+                <h3>{build.title}</h3>
+                <p>{build.body}</p>
+                {build.href ? (
+                  <a href={build.href} target="_blank" rel="noreferrer">
+                    View <span className="sr-only">{build.title}</span> →
+                  </a>
+                ) : (
+                  <span className="coursework-card__soon">Link coming soon</span>
+                )}
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
